@@ -20,7 +20,7 @@ class TestGame(unittest.TestCase):
 
         game = Game(white, black, 1)
 
-        self.assertTrue(game.whiteWon())
+        self.assertTrue(game.white_won())
 
     def test_black_won_returns_correct_value(self):
         white = Player("Jan Kowalski", 1200)
@@ -28,4 +28,4 @@ class TestGame(unittest.TestCase):
 
         game = Game(white, black, 2)
 
-        self.assertTrue(game.blackWon())
+        self.assertTrue(game.black_won())
