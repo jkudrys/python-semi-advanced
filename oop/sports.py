@@ -8,27 +8,28 @@ class Arena:
 
     def add_game(self, game):
         self.games.append(game)
+        self.calc_standing()
 
     def calc_standing(self):
-        stand = {}
-        c = 0
+        players = []
+        stands = []
         for game in self.games:
-            stand[game.white.name] = 0
-            stand[game.black.name] = 0
-            c += 1
-        print(stand)
+            if game.white not in players:
+                players.append(game.white)
+                stands.append(0)
+            if game.black not in players:
+                players.append(game.black)
+                stands.append(0)
 
         for game in self.games:
             if game.result == 1:
-                stand[game.white.name] += 1
+                stands[players.index(game.white)] += 1
             if game.result == 2:
-                stand[game.black.name] += 1
-        print(stand)
-        stand_list = list(stand.items())
-        print(stand_list)
-        sorted_list = sorted(stand_list, key=lambda x: x[1])
-        print(sorted_list)
+                stands[players.index(game.black)] += 1
 
+        sorted_stands = sorted(list(zip(players, stands)), key=lambda x: x[1])
+
+        self.standing = [i for i, v in reversed(sorted_stands)]
 
 
 class Player:
@@ -57,4 +58,3 @@ class Game:
 
     def black_won(self):
         return self.result == 2
-#
