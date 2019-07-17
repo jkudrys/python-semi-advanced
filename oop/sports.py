@@ -26,6 +26,8 @@ class Arena:
         print(stand)
         stand_list = list(stand.items())
         print(stand_list)
+        sorted_list = sorted(stand_list, key=lambda x: x[1])
+        print(sorted_list)
 
 
 
