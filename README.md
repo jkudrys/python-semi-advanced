@@ -19,6 +19,7 @@ W tabeli poniżej znajdują się polecenia, których używaliśmy na zajęciach.
 | git checkout <nazwa taga>                 | repo przechodzi na dany tag                                                                 |
 | git clone <link>                          | kopiuje repozytorium ze zdalnego serwera                                                    |
 | git branch                                | pokazuje wszystkie branche; aktualny z gwiazdką                                             |
+| git branch -a                             | pokazuje wszystkie branche, również remote; aktualny z gwiazdką                             |
 | git branch <nazwa>                        | tworzy nowy branch, ale na niego nie przechodzi                                             |
 | git checkout -bwa>                        | tworzy nowy branch, i na niego przechodzi                                                   |
 | git commit                                | otwiera edytor w celu podania commit message                                                |
