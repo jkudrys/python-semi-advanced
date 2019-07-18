@@ -1,5 +1,22 @@
 from oop.sports import Player, Game, Arena
 
+
+def print_lower_case(string):
+    print(string.lower())
+
+
+def print_upper_case(string):
+    print(string.upper())
+
+
+def print_mod_string(string, modifier):
+    print(modifier(string))
+
+
+def to_lower_case(string):
+    return string.lower()
+
+
 if __name__ == '__main__':
     arena = Arena()
 
@@ -26,3 +43,15 @@ if __name__ == '__main__':
 
     print()
     print(arena.standing[0].name)
+
+    print(player1 == player1)
+    print(player1 == player2)
+
+    print(player1.__hash__())
+    print(player2.__hash__())
+
+    print_upper_case('Hello')
+    print_lower_case('Hello')
+
+    print_mod_string('Hello', lambda x: x.lower())
+    print_mod_string('Hello', to_lower_case)

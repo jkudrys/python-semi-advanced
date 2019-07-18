@@ -28,7 +28,6 @@ class Arena:
                 stands[players.index(game.black)] += 1
 
         sorted_stands = sorted(list(zip(players, stands)), key=lambda x: x[1])
-
         self.standing = [i for i, v in reversed(sorted_stands)]
 
 
@@ -38,8 +37,24 @@ class Player:
             raise NameToShort()
         if rank < 0:
             raise RankToLow()
-        self.name = name
+        self.__name = name
         self.ranking = rank
+
+    def __eq__(self, other):
+        if not isinstance(other, Player):
+            return False
+        return self.name == other.name
+
+    @property
+    def name(self):
+        return self.__name
+
+    def __hash__(self):
+        res = 0
+        for letter in self.name:
+            res += ord(letter)
+            res *= 31
+        return res
 
     def description(self):
         return f'My name is {self.name} and my ranking is {self.ranking}.'
