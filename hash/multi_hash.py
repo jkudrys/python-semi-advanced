@@ -1,3 +1,6 @@
+from random import randint
+
+
 class MultiHashSet:
     INIT_BUCKET = 4
     INCREASE_FACTOR = 2
@@ -45,28 +48,59 @@ class MultiHashSet:
     def __contains__(self, item):
         return self.contains(item)
 
-    def del_elem(self):
-        pass
+    def remove(self, element):
+        index = hash(element) % len(self.buckets)
+        self.buckets[index].remove(element)
 
-    def list_to_mhs(self):
-        pass
+    @property
+    def len(self):
+        count = 0
+        for bucket in self.buckets:
+            count += len(bucket)
+        return count
 
+    def add_from_list(self, lst):
+        for item in lst:
+            self.add(item)
 
+    def clear(self):
+        self.buckets = [[] for i in range(self.INIT_BUCKET)]
 
 
 if __name__ == '__main__':
+
+    def make_words(n):
+        words = []
+        letters = list('abcdefghijklmnopqrstuvwxyz')
+        for number_of_words in range(n):
+            word = ''
+            word_len = randint(4, 7)
+            for letter in range(word_len):
+                word += letters[randint(0, len(letters) - 1)]
+            print(word)
+            words.append(word)
+        return words
+
+
     mhs = MultiHashSet()
-    mhs.add('abc')
-    mhs.add('bcd')
-    mhs.add('cde')
-    mhs.add('def')
-    mhs.add('efg')
-    mhs.add('fgh')
-    mhs.add('ghi')
-    mhs.add('ghi')
+    mhs2 = MultiHashSet()
 
-    #    mhs.add('a')
+    words = make_words(13)
+    words2 = make_words(7)
+
+    mhs.add_from_list(words)
+    mhs2.add_from_list((words2))
+
     print(mhs)
+    print(mhs2)
+    print(40 * '*')
+    print(mhs.contains(words[3]))
+    print(words[2] in mhs)
 
-    print(mhs.contains('v'))
-    print(mhs.__contains__('bcd'))
+    mhs.remove(words[0])
+    print(mhs)
+    print(mhs.len)
+
+    mhs.clear()
+    print(mhs)
+    print(mhs.len)
