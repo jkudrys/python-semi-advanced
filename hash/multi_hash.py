@@ -66,6 +66,19 @@ class MultiHashSet:
     def clear(self):
         self.buckets = [[] for i in range(self.INIT_BUCKET)]
 
+    def __eq__(self, other):
+        if self.len != other.len:
+            return False
+        zipped = list(zip(self.buckets, other.buckets))
+        for tup in zipped:
+            if tup[0] != tup[1]:
+                return False
+        return True
+
+
+#    def __hash__(self):
+#        pass
+
 
 if __name__ == '__main__':
 
@@ -77,25 +90,32 @@ if __name__ == '__main__':
             word_len = randint(4, 7)
             for letter in range(word_len):
                 word += letters[randint(0, len(letters) - 1)]
-            print(word)
             words.append(word)
         return words
 
 
     mhs = MultiHashSet()
     mhs2 = MultiHashSet()
+    mhs3 = MultiHashSet()
+    mhs4 = MultiHashSet()
 
     words = make_words(13)
     words2 = make_words(7)
 
     mhs.add_from_list(words)
-    mhs2.add_from_list((words2))
+    mhs2.add_from_list(words2)
+    mhs3.add_from_list(words2)
+    mhs4.add_from_list(reversed(words2))
 
     print(mhs)
     print(mhs2)
+    print(mhs3)
+    print(mhs4)
+
     print(40 * '*')
+
     print(mhs.contains(words[3]))
-    print(words[2] in mhs)
+    print('abcde' in mhs)
 
     mhs.remove(words[0])
     print(mhs)
@@ -104,3 +124,5 @@ if __name__ == '__main__':
     mhs.clear()
     print(mhs)
     print(mhs.len)
+
+    print(mhs2 == mhs4)
